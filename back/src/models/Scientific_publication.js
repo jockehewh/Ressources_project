@@ -1,0 +1,24 @@
+import { Schema, model } from 'mongoose';
+
+const Scientific_publicationSchema = new Schema({
+    title: {type: String, required: true},
+    link: {type: String, unique: true, required: true},
+    thumbnail: {type: String, default: "uploads/scientific_publications/scientific_publication.png"},
+    authors: [
+        {type: String}
+    ],
+    publication_date: {type: Date},
+    abstract: {type: String},
+    tags: [
+        {type: String}
+    ],
+    role_id: {type: Schema.Types.ObjectId, ref: 'Role'},
+    partner_id: {type: Schema.Types.ObjectId, ref: 'Partner', required: true},
+    created_by: {type: Schema.Types.ObjectId, ref: 'User'},
+    created_at: {type: Date, default: Date.now()},
+    updated_by: {type: Schema.Types.ObjectId, ref: 'Users'},
+    updated_at: {type: Date},
+    expiration_at: {type: Date},
+});
+
+export default model('Scientific_publication', Scientific_publicationSchema);
