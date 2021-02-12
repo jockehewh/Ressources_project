@@ -1,0 +1,109 @@
+[{
+  "_id": {
+    "$oid": "600069fb0714456f5cfc7786"
+  },
+  "created_at": {
+    "$date": "2021-01-14T15:15:42.977Z"
+  },
+  "password": "test",
+  "first_name": "Dylan",
+  "last_name": "Xavir",
+  "created_by": {
+    "$oid": "600069fb0714456f5cfc7786"
+  },
+  "updated_at": {
+    "$date": "2020-01-17T23:00:00Z"
+  },
+  "updated_by": {
+    "$oid": "600069fb0714456f5cfc7786"
+  },
+  "email": "xavir.dylan@gmail.com",
+  "thumbnail": "uploads/users/user.png",
+  "partner": {
+    "$oid": "60056ff24d4875dd950b1dda"
+  },
+  "role": {
+    "$oid": "600595554d4875dd950b1ddb"
+  }
+},{
+  "_id": {
+    "$oid": "600c0cff5853bd43a8340272"
+  },
+  "created_at": {
+    "$date": "2021-01-14T15:15:42.977Z"
+  },
+  "password": "test",
+  "first_name": "Dylan",
+  "last_name": "Xavir",
+  "thumbnail": "uploads/users/user.png",
+  "created_by": {
+    "$oid": "600069fb0714456f5cfc7786"
+  },
+  "updated_at": {
+    "$date": "2020-01-17T23:00:00Z"
+  },
+  "updated_by": {
+    "$oid": "600069fb0714456f5cfc7786"
+  },
+  "email": "xavir.dylan@thp.social",
+  "partner": {
+    "$oid": "60056ff24d4875dd950b1dda"
+  },
+  "role": {
+    "$oid": "60008a224859eca0f1d6e8d1"
+  }
+},{
+  "_id": {
+    "$oid": "60120b895853bd43a834027e"
+  },
+  "created_at": {
+    "$date": "2021-01-15T15:15:42.977Z"
+  },
+  "password": "test",
+  "first_name": "Sylvain",
+  "last_name": "Narel",
+  "email": "sylvain.narel_x4_99@gmail.com",
+  "thumbnail": "uploads/users/user.png",
+  "created_by": {
+    "$oid": "600069fb0714456f5cfc7786"
+  },
+  "updated_at": {
+    "$date": "2020-01-17T23:00:00Z"
+  },
+  "updated_by": {
+    "$oid": "600069fb0714456f5cfc7786"
+  },
+  "partner": {
+    "$oid": "601204065853bd43a8340274"
+  },
+  "role": {
+    "$oid": "60008a224859eca0f1d6e8d1"
+  }
+},{
+  "_id": {
+    "$oid": "60120b895853bd43a834027f"
+  },
+  "created_at": {
+    "$date": "2021-01-16T15:15:42.977Z"
+  },
+  "password": "test",
+  "first_name": "Etienne",
+  "last_name": "Simani",
+  "email": "etienne.simani_x4_99@gmail.com",
+  "thumbnail": "uploads/users/user.png",
+  "created_by": {
+    "$oid": "600069fb0714456f5cfc7786"
+  },
+  "updated_at": {
+    "$date": "2020-01-17T23:00:00Z"
+  },
+  "updated_by": {
+    "$oid": "600069fb0714456f5cfc7786"
+  },
+  "partner": {
+    "$oid": "601204065853bd43a8340275"
+  },
+  "role": {
+    "$oid": "60008a224859eca0f1d6e8d1"
+  }
+}]

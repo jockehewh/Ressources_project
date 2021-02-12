@@ -1,0 +1,72 @@
+[{
+  "_id": {
+    "$oid": "60120def5853bd43a8340280"
+  },
+  "abstract": "L’association AFSOS a pour objet de promouvoir la connaissance et la mise en œuvre des soins oncologiques de support c‘est-à-dire l’ensemble des soins et soutiens nécessaires aux personnes malades tout au long de la maladie conjointement aux traitements onco-hémato spécifiques, lorsqu’il y en a.",
+  "link": "https://www.afsos.org/",
+  "organization": "AFSOS (Association Francophone des Soins Oncologiques de Support)",
+  "topics": [
+    "physique",
+    "psychologique"
+  ],
+  "targets": [
+    "soignants"
+  ],
+  "tags": [
+    "soins de support",
+    "oncologie",
+    "recommandations"
+  ],
+  "created_by": {
+    "$oid": "600069fb0714456f5cfc7786"
+  },
+  "created_at": {
+    "$date": "2018-02-14T23:00:00Z"
+  },
+  "partner_id": {
+    "$oid": "60056ff24d4875dd950b1dda"
+  },
+  "updated_at": {
+    "$date": "2020-01-17T23:00:00Z"
+  },
+  "updated_by": {
+    "$oid": "600069fb0714456f5cfc7786"
+  },
+  "title": "La place des proches aidants",
+  "thumbnail": "uploads/web_sites/web_site.png"
+},{
+  "_id": {
+    "$oid": "60120def5853bd43a8340281"
+  },
+  "abstract": "Vous aider à prendre des décisions éclairées en cas de problèmes de santé sérieux ou de situations médicales complexes. Accédez facilement à un médecin expert de votre maladie pour obtenir son avis écrit en moins de 7 jours.",
+  "link": "https://www.deuxiemeavis.fr/famille/tumeurs-et-cancers",
+  "organization": "Deuxieme Avis",
+  "topics": [
+    "physique"
+  ],
+  "targets": [
+    "patients"
+  ],
+  "tags": [
+    "deuxième avis",
+    "médecin",
+    "dossier médical"
+  ],
+  "created_by": {
+    "$oid": "600069fb0714456f5cfc7786"
+  },
+  "created_at": {
+    "$date": "2018-02-14T23:00:00Z"
+  },
+  "partner_id": {
+    "$oid": "60056ff24d4875dd950b1dda"
+  },
+  "updated_at": {
+    "$date": "2020-01-17T23:00:00Z"
+  },
+  "updated_by": {
+    "$oid": "600069fb0714456f5cfc7786"
+  },
+  "title": "Obtenir un 2eme avis médical pour une tumeur ou un cancer",
+  "thumbnail": "uploads/web_sites/web_site.png"
+}]

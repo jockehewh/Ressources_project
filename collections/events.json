@@ -1,0 +1,49 @@
+[{
+  "_id": {
+    "$oid": "6012123f5853bd43a8340285"
+  },
+  "created_at": {
+    "$date": "2021-01-15T10:47:38.678Z"
+  },
+  "title": "Journée mondiale contre le cancer - Rencontres 2021 de l'INCa",
+  "abstract": "À l’occasion de la journée mondiale contre les cancers le 4 février 2021, l’Institut national du cancer vous propose d’assister à l’édition 2021 de ses Rencontres. Lors de cet événement sera présenté officiellement la prochaine stratégie décennale de lutte contre les cancers. Ces rencontres 2021 proposées dans un format 100% digital seront ouvertes à tous grâce à une retransmission live sur ce site et également sur les réseaux sociaux. Cette événement sera l’occasion de faire un bilan des Plans cancers précédents et de découvrir les nouvelles orientations que prendra la lutte contre les cancers dans les dix prochaines années.",
+  "topics": [
+    "physique",
+    "psychologique",
+    "sociale"
+  ],
+  "targets": [
+    "patients",
+    "aidants",
+    "soignants",
+    "associations"
+  ],
+  "tags": [
+    "stratégie de lutte",
+    "INCa"
+  ],
+  "created_by": {
+    "$oid": "600069fb0714456f5cfc7786"
+  },
+  "price": "0",
+  "thumbnail": "uploads/events/event.jpg",
+  "phone": "0688458765",
+  "promoter": "Institut national du cancer (INCa)",
+  "location": "en ligne - format 100% digital",
+  "partner_id": {
+    "$oid": "60056ff24d4875dd950b1dda"
+  },
+  "updated_at": {
+    "$date": "2020-01-17T23:00:00Z"
+  },
+  "updated_by": {
+    "$oid": "600069fb0714456f5cfc7786"
+  },
+  "end_at": {
+    "$date": "2021-02-04T18:00:00Z"
+  },
+  "start_at": {
+    "$date": "2021-02-04T10:00:00Z"
+  },
+  "email": "contact@thp.social"
+}]

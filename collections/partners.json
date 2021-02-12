@@ -1,0 +1,34 @@
+[{
+  "_id": {
+    "$oid": "60056ff24d4875dd950b1dda"
+  },
+  "subscription": true,
+  "created_at": {
+    "$date": "2020-01-18T23:00:00Z"
+  },
+  "thumbnail": "uploads/partners/uzfubmbl8kobvdi6oj6sid.png",
+  "website": "https://www.thp.social/",
+  "name": "Trusted Health Partners"
+},{
+  "_id": {
+    "$oid": "601204065853bd43a8340274"
+  },
+  "subscription": true,
+  "created_at": {
+    "$date": "2020-01-20T23:00:00Z"
+  },
+  "thumbnail": "uploads/partners/ok9mhgcj5pimj2ms3ds12r.jpg",
+  "name": "Ma Belle Asso",
+  "website": "https://www.mabelleasso.com/"
+},{
+  "_id": {
+    "$oid": "601204065853bd43a8340275"
+  },
+  "subscription": true,
+  "created_at": {
+    "$date": "2020-01-20T23:00:05Z"
+  },
+  "thumbnail": "uploads/partners/84cipn36ob4nke30whtjq.jpg",
+  "name": "Ma Mutuelle Préférée",
+  "website": "https://www.mamutuelleprefere.com/"
+}]

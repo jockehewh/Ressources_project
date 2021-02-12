@@ -1,0 +1,44 @@
+[{
+  "_id": {
+    "$oid": "601211055853bd43a8340284"
+  },
+  "topics": [
+    "physique",
+    "psychologique"
+  ],
+  "targets": [
+    "soignants"
+  ],
+  "tags": [
+    "soins de support",
+    "oncologie",
+    "recommandations",
+    "synthèse"
+  ],
+  "created_at": {
+    "$date": "2021-01-15T10:16:16.080Z"
+  },
+  "created_by": {
+    "$oid": "600069fb0714456f5cfc7786"
+  },
+  "partner_id": {
+    "$oid": "60056ff24d4875dd950b1dda"
+  },
+  "updated_at": {
+    "$date": "2020-01-17T23:00:00Z"
+  },
+  "updated_by": {
+    "$oid": "600069fb0714456f5cfc7786"
+  },
+  "abstract": "Indépendamment de la maladie du patient, les proches aidants présentent souvent détresse psychologique et fatigue. L’impact sur le proche aidant varie selon les symptômes, les traitements et le pronostic de la maladie. Ce référentiel s’adresse aux soignants (médicaux, paramédicaux et de soins oncologiques de support) intervenants auprès de patients adultes atteints de cancer, en intra-hospitalier ou à domicile, et a pour objectif de sensibiliser les soignants à la place et au rôle des proches aidants ainsi qu’à la vigilance/attention qu’il faut leur apporter.",
+  "author": "Lucie Arthrose",
+  "link": "https://www.afsos.org/fiche-referentiel/place-proches-aidants/",
+  "publication_date": {
+    "$date": "2018-02-14T00:00:00Z"
+  },
+  "thumbnail": "uploads/web_articles/web_article.jpg",
+  "title": "La place des proches aidants",
+  "expiration_at": {
+    "$date": "2023-02-14T23:00:00Z"
+  }
+}]

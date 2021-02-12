@@ -1,0 +1,111 @@
+[{
+  "_id": {
+    "$oid": "60120fce5853bd43a8340282"
+  },
+  "title": "Acupuncture for Chronic Pain: Update of an Individual Patient Data Meta-Analysis ",
+  "link": "https://pubmed.ncbi.nlm.nih.gov/29198932/",
+  "authors": [
+    "Andrew J Vickers",
+    "Emily A Vertosick",
+    ", ...,",
+    "Klaus Linde",
+    "Acupuncture Trialists' Collaboration"
+  ],
+  "abstract": "Despite wide use in clinical practice, acupuncture remains a controversial treatment for chronic pain. Our objective was to update an individual patient data meta-analysis to determine the effect size of acupuncture for 4 chronic pain conditions. We searched MEDLINE and the Cochrane Central Registry of Controlled Trials randomized trials published up until December 31, 2015. We included randomized trials of acupuncture needling versus either sham acupuncture or no acupuncture control for nonspecific musculoskeletal pain, osteoarthritis, chronic headache, or shoulder pain. Trials were only included if allocation concealment was unambiguously determined to be adequate. Raw data were obtained from study authors and entered into an individual patient data meta-analysis. The main outcome measures were pain and function. An additional 13 trials were identified, with data received for a total of 20,827 patients from 39 trials. Acupuncture was superior to sham as well as no acupuncture control for each pain condition (all P < .001) with differences between groups close to .5 SDs compared with no acupuncture control and close to .2 SDs compared with sham. We also found clear evidence that the effects of acupuncture persist over time with only a small decrease, approximately 15%, in treatment effect at 1 year. In secondary analyses, we found no obvious association between trial outcome and characteristics of acupuncture treatment, but effect sizes of acupuncture were associated with the type of control group, with smaller effects sizes for sham controlled trials that used a penetrating needle for sham, and for trials that had high intensity of intervention in the control arm. We conclude that acupuncture is effective for the treatment of chronic pain, with treatment effects persisting over time. Although factors in addition to the specific effects of needling at correct acupuncture point locations are important contributors to the treatment effect, decreases in pain after acupuncture cannot be explained solely in terms of placebo effects. Variations in the effect size of acupuncture in different trials are driven predominantly by differences in treatments received by the control group rather than by differences in the characteristics of acupuncture treatment. Perspective: Acupuncture is effective for the treatment of chronic musculoskeletal, headache, and osteoarthritis pain. Treatment effects of acupuncture persist over time and cannot be explained solely in terms of placebo effects. Referral for a course of acupuncture treatment is a reasonable option for a patient with chronic pain.",
+  "publication_date": {
+    "$date": "2018-05-19T23:00:00Z"
+  },
+  "languages": [
+    "EN"
+  ],
+  "topics": [
+    "physique"
+  ],
+  "targets": [
+    "patients",
+    "soignants"
+  ],
+  "tags": [
+    "acupuncture",
+    "douleur du dos",
+    "douleur chronique",
+    "meta-analyses",
+    "migraine",
+    "douleur du cou",
+    "osteoarthrite"
+  ],
+  "created_at": {
+    "$date": "2020-01-17T23:00:00Z"
+  },
+  "created_by": {
+    "$oid": "600069fb0714456f5cfc7786"
+  },
+  "partner_id": {
+    "$oid": "60056ff24d4875dd950b1dda"
+  },
+  "updated_at": {
+    "$date": "2020-01-17T23:00:00Z"
+  },
+  "updated_by": {
+    "$oid": "600069fb0714456f5cfc7786"
+  },
+  "expiration_at": {
+    "$date": "2023-05-19T23:00:00Z"
+  },
+  "thumbnail": "uploads/scientific_publications/scientific_publication.png"
+},{
+  "_id": {
+    "$oid": "60120fce5853bd43a8340283"
+  },
+  "title": "Integrative Medicine Therapies for Pain Management in Cancer Patients",
+  "link": "https://pubmed.ncbi.nlm.nih.gov/31567462/",
+  "authors": [
+    "Gary Deng"
+  ],
+  "abstract": "Pain management for cancer patients should include pharmacologic and nonpharmacologic interventions. Integrative medicine therapies, such as mind-body practice, acupuncture, massage therapy, and music therapy, have been studied for their roles in pain management. Data from randomized controlled trials support the effect of hypnosis, acupuncture, and music therapy in reduction of pain. Mindfulness meditation, yoga, qigong, and massage therapy, although may not reduce pain per se, can relieve anxiety and mood changes, which are commonly associated with pain. In clinical practice, one should also consider burdens and risks to patients, patient preference, and the presence or absence of better alternatives when making decisions on whether an integrative medicine therapy is of clinical value.",
+  "publication_date": {
+    "$date": "2019-09-25T23:00:00Z"
+  },
+  "languages": [
+    "EN"
+  ],
+  "topics": [
+    "physique",
+    "psychologique"
+  ],
+  "targets": [
+    "patients",
+    "soignants"
+  ],
+  "tags": [
+    "douleur",
+    "cancer",
+    "gestion de la douleur",
+    "medecine integrative",
+    " therapies corps-esprit",
+    "hypnose",
+    "pleine conscience",
+    "acupuncture",
+    "massage",
+    "musicotherapy"
+  ],
+  "created_at": {
+    "$date": "2020-01-17T23:00:00Z"
+  },
+  "created_by": {
+    "$oid": "600069fb0714456f5cfc7786"
+  },
+  "partner_id": {
+    "$oid": "60056ff24d4875dd950b1dda"
+  },
+  "updated_at": {
+    "$date": "2020-01-17T23:00:00Z"
+  },
+  "updated_by": {
+    "$oid": "600069fb0714456f5cfc7786"
+  },
+  "expiration_at": {
+    "$date": "2026-09-25T23:00:00Z"
+  },
+  "thumbnail": "uploads/scientific_publications/scientific_publication.png"
+}]

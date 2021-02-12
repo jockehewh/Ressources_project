@@ -1,0 +1,19 @@
+[{
+  "_id": {
+    "$oid": "6006d48b4d4875dd950b1df2"
+  },
+  "view": true,
+  "reading": true,
+  "id_patient": {
+    "$oid": "6006d4c94d4875dd950b1df4"
+  },
+  "id_ressource": {
+    "$oid": "6006d4c54d4875dd950b1df3"
+  },
+  "reading_at": {
+    "$date": "2021-01-24T23:00:00Z"
+  },
+  "view_at": {
+    "$date": "2021-01-24T23:00:00Z"
+  }
+}]

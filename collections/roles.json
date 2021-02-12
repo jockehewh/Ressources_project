@@ -1,0 +1,19 @@
+[{
+  "_id": {
+    "$oid": "600089e54859eca0f1d6e8d0"
+  },
+  "code": 10,
+  "name": "Admin"
+},{
+  "_id": {
+    "$oid": "60008a224859eca0f1d6e8d1"
+  },
+  "code": 0,
+  "name": "Member"
+},{
+  "_id": {
+    "$oid": "600595554d4875dd950b1ddb"
+  },
+  "code": 20,
+  "name": "THP_Admin"
+}]
