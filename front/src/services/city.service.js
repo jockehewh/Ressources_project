@@ -5,7 +5,7 @@ export default class CityService{
     static async list(){
         return await axios.get(`${process.env.REACT_APP_HOST_API}/cities`,{
             headers: {
-                'Authorization': `Bearer ${localStorage.getItem('ThpToken')}`
+                'Authorization': `Bearer ${localStorage.getItem('user_token')}`
             }
         });
     }
@@ -13,7 +13,7 @@ export default class CityService{
     static async details(codePostal){
         return await axios.get(`${process.env.REACT_APP_HOST_API}/cities/${codePostal}`,{
             headers: {
-                'Authorization': `Bearer ${localStorage.getItem('ThpToken')}`
+                'Authorization': `Bearer ${localStorage.getItem('user_token')}`
             }
         });
     }

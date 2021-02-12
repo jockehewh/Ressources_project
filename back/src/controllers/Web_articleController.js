@@ -8,7 +8,11 @@ export default class Web_articleController{
         let body = {};
 
         try{
-            let articles = await Web_article.find().select('-__v');
+            let articles = await Web_article.find()
+                .populate('partner')
+                .populate('created_by')
+                .populate('updated_by')
+                .select('-__v');
             body = {articles};
         }catch (e) {
             status = status !== 200 ? status : 500;
@@ -26,7 +30,11 @@ export default class Web_articleController{
 
         try{
             let {partner_id} = req.params;
-            let articles = await Web_article.find({'partner_id': partner_id}).select('-__v');
+            let articles = await Web_article.find({'partner_id': partner_id})
+                .populate('partner')
+                .populate('created_by')
+                .populate('updated_by')
+                .select('-__v');
             body = {articles};
         }catch (e) {
             status = status !== 200 ? status : 500;
@@ -44,7 +52,11 @@ export default class Web_articleController{
 
         try{
             let {id} = req.params;
-            let article = await Web_article.findById(id).select('-__v');
+            let article = await Web_article.findById(id)
+                .populate('partner')
+                .populate('created_by')
+                .populate('updated_by')
+                .select('-__v');
             body = {article};
         }catch (e) {
             status = status !== 200 ? status : 500;
@@ -78,27 +90,43 @@ export default class Web_articleController{
         let body = {};
 
         try{
-            let stock_thumbnail = req.body.thumbnail;
             delete req.body.thumbnail;
             let {id} = req.params;
             let article = await Web_article.findByIdAndUpdate(id, req.body, {new: true})
+                .populate('partner')
+                .populate('created_by')
+                .populate('updated_by')
                 .select('-__v');
-
-            if(stock_thumbnail !== undefined){    
-                if(fs.existsSync(`./${article.thumbnail}`)){
-                    await fs.unlinkSync(`./${article.thumbnail}`);
-                }
-
-                article.thumbnail = stock_thumbnail;
-                article.save();
-            }
-
             body = {article};
         }catch (e) {
             status = status !== 200 ? status : 500;
             body = {
                 error: e.error || 'Web_article update',
                 message: e.message || 'An error is occured into web_article update',
+            }
+        }
+        return res.status(status).json(body);
+    }
+
+    static async updateThumbnail(req, res){
+        let status = 200;
+        let body = {};
+
+        try{
+            let {id} = req.params;
+            let article = await Web_article.findById(id).select('thumbnail');    
+
+            if(fs.existsSync(`./${article.thumbnail}`)){
+                await fs.unlinkSync(`./${article.thumbnail}`);
+            }
+            article.thumbnail = req.body.thumbnail;
+            await article.save()
+            body = {article};
+        }catch (e) {
+            status = status !== 200 ? status : 500;
+            body = {
+                error: e.error || 'Web_article_thumbnail update',
+                message: e.message || 'An error is occured into web_article_thumbnail update',
             }
         }
         return res.status(status).json(body);

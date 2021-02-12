@@ -35,7 +35,12 @@ export default class UserController{
         let body = {};
 
         try{
-            let users = await User.find().select('-__v -password');
+            let users = await User.find()
+                .populate('role')
+                .populate('partner')
+                .populate('created_by')
+                .populate('updated_by')
+                .select('-__v -password');
             body = {users};
         }catch (e) {
             status = status !== 200 ? status : 500;
@@ -53,7 +58,12 @@ export default class UserController{
 
         try{
             let {partner_id} = req.params;
-            let users = await User.find({'partner_id': partner_id}).select('-__v -password');
+            let users = await User.find({'partner_id': partner_id})
+                .populate('role')
+                .populate('partner')
+                .populate('created_by')
+                .populate('updated_by')
+                .select('-__v -password');
             body = {users};
         }catch (e) {
             status = status !== 200 ? status : 500;
@@ -71,7 +81,12 @@ export default class UserController{
 
         try{
             let {id} = req.params;
-            let user = await User.findById(id).select('-__v -password');
+            let user = await User.findById(id)
+                .populate('role')
+                .populate('partner')
+                .populate('created_by')
+                .populate('updated_by')
+                .select('-__v');
             body = {user};
         }catch (e) {
             status = status !== 200 ? status : 500;
@@ -105,27 +120,44 @@ export default class UserController{
         let body = {};
 
         try{
-            let stock_thumbnail = req.body.thumbnail;
             delete req.body.thumbnail;
             let {id} = req.params;
             let user = await User.findByIdAndUpdate(id, req.body, {new: true})
+                .populate('role')
+                .populate('partner')
+                .populate('created_by')
+                .populate('updated_by')
                 .select('-__v -password');
-            
-            if(stock_thumbnail !== undefined){    
-                if(fs.existsSync(`./${user.thumbnail}`)){
-                    await fs.unlinkSync(`./${user.thumbnail}`);
-                }
-
-                user.thumbnail = stock_thumbnail;
-                user.save();
-            }
-
             body = {user};
         }catch (e) {
             status = status !== 200 ? status : 500;
             body = {
                 error: e.error || 'User update',
                 message: e.message || 'An error is occured into user update',
+            }
+        }
+        return res.status(status).json(body);
+    }
+
+    static async updateThumbnail(req, res){
+        let status = 200;
+        let body = {};
+
+        try{
+            let {id} = req.params;
+            let user = await User.findById(id).select('thumbnail');
+
+            if(fs.existsSync(`./${user.thumbnail}`)){
+                await fs.unlinkSync(`./${user.thumbnail}`);
+            }
+            user.thumbnail = req.body.thumbnail;
+            await user.save();
+            body = {user};
+        }catch (e) {
+            status = status !== 200 ? status : 500;
+            body = {
+                error: e.error || 'User_thumbnail update',
+                message: e.message || 'An error is occured into user_thumbnail update',
             }
         }
         return res.status(status).json(body);

@@ -26,22 +26,20 @@ class App extends Component{
     render() {
         return <BrowserRouter>
       
-
-            {//If user login
-              this.props.user && 
-              <Header />
-            }
-
-            {//If user logout
-              ! this.props.user && 
-              <div>
-                {/*LOGIN*/}
-                <Route exact path="/login" component={Login}/>
-                <Redirect to={"/login"}/>
-              </div>
-            }
-
+          {//If user logout
+            ! this.props.user && 
             <div>
+              {/*LOGIN*/}
+              <Route exact path="/login" component={Login}/>
+              <Redirect to={"/login"}/>
+            </div>
+          }
+
+          {//If user login
+            this.props.user && 
+            <div>
+                <Header />
+
                 {/*Home*/}
                 <Route exact path="/" component={Home}/>
 
@@ -74,8 +72,9 @@ class App extends Component{
                   {/*Events*/}
                   <Route exact path="/ressources/events" component={Events}/>
                   <Route exact path="/ressources/events/:id" component={Events_details}/>
-
             </div> 
+          }
+          
         </BrowserRouter>
     }
 }

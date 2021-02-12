@@ -8,7 +8,9 @@ export default class PartnerController{
         let body = {};
 
         try{
-            let partners = await Partner.find().select('-__v');
+            let partners = await Partner.find()
+                .populate('city')
+                .select('-__v');
             body = {partners};
         }catch (e) {
             status = status !== 200 ? status : 500;
@@ -26,7 +28,9 @@ export default class PartnerController{
 
         try{
             let {id} = req.params;
-            let partner = await Partner.findById(id).select('-__v');
+            let partner = await Partner.findById(id)
+                .populate('city')
+                .select('-__v');
             body = {partner};
         }catch (e) {
             status = status !== 200 ? status : 500;
@@ -64,6 +68,7 @@ export default class PartnerController{
             delete req.body.thumbnail;
             let {id} = req.params;
             let partner = await Partner.findByIdAndUpdate(id, req.body, {new: true})
+                .populate('city')
                 .select('-__v');
 
             if(stock_thumbnail !== undefined){
@@ -81,6 +86,30 @@ export default class PartnerController{
             body = {
                 error: e.error || 'Partner update',
                 message: e.message || 'An error is occured into partner update',
+            }
+        }
+        return res.status(status).json(body);
+    }
+
+    static async updateThumbnail(req, res){
+        let status = 200;
+        let body = {};
+
+        try{
+            let {id} = req.params;
+            let partner = await Partner.findById(id).select('thumbnail');
+
+            if(fs.existsSync(`./${partner.thumbnail}`)){
+                await fs.unlinkSync(`./${partner.thumbnail}`);
+            }
+            partner.thumbnail = req.body.thumbnail;
+            await partner.save();
+            body = {partner};
+        }catch (e) {
+            status = status !== 200 ? status : 500;
+            body = {
+                error: e.error || 'Partner_thumbnail update',
+                message: e.message || 'An error is occured into partner_thumbnail update',
             }
         }
         return res.status(status).json(body);

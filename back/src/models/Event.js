@@ -14,10 +14,10 @@ const EventSchema = new Schema({
     price: {type: Number, default: 0},
     start_datetime: {type: Date},
     end_datetime: {type: Date},
-    partner_id: {type: Schema.Types.ObjectId, ref: 'Partner', required: true},
+    partner: {type: Schema.Types.ObjectId, ref: 'Partner', required: true},
     created_by: {type: Schema.Types.ObjectId, ref: 'User'},
     created_at: {type: Date, default: Date.now()},
-    updated_by: {type: Schema.Types.ObjectId, ref: 'Users'},
+    updated_by: {type: Schema.Types.ObjectId, ref: 'User'},
     updated_at: {type: Date},
 });
 

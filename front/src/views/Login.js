@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import UserService from "../services/user.service";
 import {connect} from 'react-redux';
-import {updateUser} from "../actions/users.actions";
+import {updateUser, updateUserToken} from "../actions/users.actions";
 
 class Login extends Component {
 
@@ -28,13 +28,11 @@ class Login extends Component {
 
         try{
             let response = await UserService.auth(body);
+            delete response.data.user.password;
             let token = response.data.token;
-            let user_id = response.data.user._id;
-
-            localStorage.setItem('ThpToken', token);
-            sessionStorage.setItem('user_id', user_id);
-
-            this.props.updateUser(response.data.user);
+            localStorage.setItem('user_token', token);
+            this.props.updateUser(response.data.user._id);
+            this.props.updateUserToken(token);
             this.props.history.push('/');
         }catch (e) {
             this.setState({isError: true});
@@ -60,7 +58,7 @@ class Login extends Component {
                 </div>
                 <button type="submit" className="btn btn-primary">Login</button>
 
-                {isError && <p>Erreur d'email et / ou de mot de passe</p>}
+                {isError && <div class="alert alert-danger" role="alert">Erreur d'email et / ou de mot de passe</div>}
 
             </form>
         </div>
@@ -68,11 +66,11 @@ class Login extends Component {
 }
 
 const mapStateToProps = state => {
-    return {user: state.user}
+    return {user: state.user, token: state.token}
 };
 
 const mapDispatchToProps = dispatch => {
-    return {updateUser: user => dispatch(updateUser(user))}
+    return {updateUser: user => dispatch(updateUser(user)), updateUserToken: token => dispatch(updateUserToken(token))}
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

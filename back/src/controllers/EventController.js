@@ -8,7 +8,12 @@ export default class EventController{
         let body = {};
 
         try{
-            let events = await Event.find().select('-__v');
+            let events = await Event.find()
+                .populate('partner')
+                .populate('city')
+                .populate('created_by')
+                .populate('updated_by')
+                .select('-__v');
             body = {events};
         }catch (e) {
             status = status !== 200 ? status : 500;
@@ -26,7 +31,12 @@ export default class EventController{
 
         try{
             let {partner_id} = req.params;
-            let events = await Event.find({'partner_id': partner_id}).select('-__v');
+            let events = await Event.find({'partner_id': partner_id})
+                .populate('partner')
+                .populate('city')
+                .populate('created_by')
+                .populate('updated_by')
+                .select('-__v');
             body = {events};
         }catch (e) {
             status = status !== 200 ? status : 500;
@@ -44,7 +54,12 @@ export default class EventController{
 
         try{
             let {id} = req.params;
-            let event = await Event.findById(id).select('-__v');
+            let event = await Event.findById(id)
+                .populate('partner')
+                .populate('city')
+                .populate('created_by')
+                .populate('updated_by')
+                .select('-__v');
             body = {event};
         }catch (e) {
             status = status !== 200 ? status : 500;
@@ -78,28 +93,44 @@ export default class EventController{
         let body = {};
 
         try{
-            let stock_thumbnail = req.body.thumbnail;
             delete req.body.thumbnail;
             let {id} = req.params;
             let event = await Event.findByIdAndUpdate(id, req.body, {new: true})
+                .populate('partner')
+                .populate('city')
+                .populate('created_by')
+                .populate('updated_by')
                 .select('-__v');
-
-            if(stock_thumbnail !== undefined){
-                if(fs.existsSync(`./${event.thumbnail}`)){
-                    await fs.unlinkSync(`./${event.thumbnail}`);
-                }
-
-                event.thumbnail = stock_thumbnail;
-                event.save();
-            }
-            
             body = {event};
-
         }catch (e) {
             status = status !== 200 ? status : 500;
             body = {
                 error: e.error || 'Event update',
                 message: e.message || 'An error is occured into event update',
+            }
+        }
+        return res.status(status).json(body);
+    }
+
+    static async updateThumbnail(req, res){
+        let status = 200;
+        let body = {};
+
+        try{
+            let {id} = req.params;
+            let event = await Event.findById(id).select('thumbnail');    
+
+            if(fs.existsSync(`./${event.thumbnail}`)){
+                await fs.unlinkSync(`./${event.thumbnail}`);
+            }
+            event.thumbnail = req.body.thumbnail;
+            await event.save()
+            body = {event};
+        }catch (e) {
+            status = status !== 200 ? status : 500;
+            body = {
+                error: e.error || 'Event_thumbnail update',
+                message: e.message || 'An error is occured into event_thumbnail update',
             }
         }
         return res.status(status).json(body);

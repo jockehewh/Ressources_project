@@ -14,7 +14,7 @@ export default class UserService{
     static async list(){
         return await axios.get(`${process.env.REACT_APP_HOST_API}/users`,{
             headers: {
-                'Authorization': `Bearer ${localStorage.getItem('ThpToken')}`
+                'Authorization': `Bearer ${localStorage.getItem('user_token')}`
             }
         });
     }
@@ -22,7 +22,7 @@ export default class UserService{
     static async list_by_partner(partner_id){
         return await axios.get(`${process.env.REACT_APP_HOST_API}/users/by/${partner_id}`,{
             headers: {
-                'Authorization': `Bearer ${localStorage.getItem('ThpToken')}`
+                'Authorization': `Bearer ${localStorage.getItem('user_token')}`
             }
         });
     }
@@ -30,7 +30,7 @@ export default class UserService{
     static async details(id){
         return await axios.get(`${process.env.REACT_APP_HOST_API}/users/${id}`,{
             headers: {
-                'Authorization': `Bearer ${localStorage.getItem('ThpToken')}`
+                'Authorization': `Bearer ${localStorage.getItem('user_token')}`
             }
         });
     }
@@ -38,7 +38,16 @@ export default class UserService{
     static async update(id, body){
         return await axios.put(`${process.env.REACT_APP_HOST_API}/users/${id}`, body,{
             headers: {
-                'Authorization': `Bearer ${localStorage.getItem('ThpToken')}`
+                'Authorization': `Bearer ${localStorage.getItem('user_token')}`
+            }
+        });
+    }
+
+    static async updateThumbnail(id, body){
+        return await axios.put(`${process.env.REACT_APP_HOST_API}/users/${id}/thumbnail`, body,{
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('user_token')}`,
+                'Content-Type': 'multipart/form-data'
             }
         });
     }
@@ -46,7 +55,8 @@ export default class UserService{
     static async create(body){
         return await axios.post(`${process.env.REACT_APP_HOST_API}/users`, body,{
             headers: {
-                'Authorization': `Bearer ${localStorage.getItem('ThpToken')}`
+                'Authorization': `Bearer ${localStorage.getItem('user_token')}`,
+                'Content-Type': 'multipart/form-data'
             }
         });
     }
@@ -54,7 +64,7 @@ export default class UserService{
     static async delete(id){
         return await axios.put(`${process.env.REACT_APP_HOST_API}/users/${id}`,{
             headers: {
-                'Authorization': `Bearer ${localStorage.getItem('ThpToken')}`
+                'Authorization': `Bearer ${localStorage.getItem('user_token')}`
             }
         });
     }

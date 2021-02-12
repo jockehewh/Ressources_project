@@ -46,3 +46,11 @@ code {
 .graph{
   width: 45%;
 }
+
+.btn-primary{
+  margin-top: 11px !important;
+}
+
+.alert-danger{
+  margin-top: 20px !important;
+}

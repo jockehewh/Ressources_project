@@ -1,8 +1,8 @@
 
-export const updateUserToken = (user_token) => {
+export const updateUserToken = (token) => {
     return {
         type: "UPDATE_USER_TOKEN",
-        user_token: user_token
+        token: token
     }
 };
 

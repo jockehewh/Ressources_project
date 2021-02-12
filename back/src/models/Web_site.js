@@ -9,10 +9,10 @@ const Web_siteSchema = new Schema({
     tags: [
         {type: String}
     ],
-    partner_id: {type: Schema.Types.ObjectId, ref: 'Partner', required: true},
+    partner: {type: Schema.Types.ObjectId, ref: 'Partner', required: true},
     created_by: {type: Schema.Types.ObjectId, ref: 'User'},
     created_at: {type: Date, default: Date.now()},
-    updated_by: {type: Schema.Types.ObjectId, ref: 'Users'},
+    updated_by: {type: Schema.Types.ObjectId, ref: 'User'},
     updated_at: {type: Date},
 });
 
