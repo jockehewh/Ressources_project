@@ -26,7 +26,6 @@ export default class Partner extends Component{
             <div class="text-center content_center">
                 <img src={`${process.env.REACT_APP_HOST_API}/${partner.thumbnail}`} class="rounded thumbnail_partner" alt="..."/>
                 <div class="card-body">
-                    <h5 class="card-title">{partner.name}</h5>
                     <div>
                         <p class="card-text"><b>Site web : </b><a href={partner.website}>{partner.website}</a></p>
                         <p class="card-text"><b>Abonnement : </b>Formule payante</p>

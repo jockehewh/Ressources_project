@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {updateUser, updateUserToken} from "../actions/users.actions";
 import UserService from "../services/user.service";
 
 class Account extends Component{
@@ -16,8 +15,8 @@ class Account extends Component{
             password_new: {},
             password_comfirm :{},
             thumbnail: null,
-            isError: false
-        }
+            isError: false,
+        };
     }
     
     async componentDidMount() {
@@ -34,7 +33,8 @@ class Account extends Component{
                 first_name : first_name, 
                 password : password,
                 password_new : password,
-                password_comfirm : password });
+                password_comfirm : password,
+            });
         }catch (e) {
             console.error(e);
         }
@@ -42,7 +42,7 @@ class Account extends Component{
 
     handleChangeUpdate(e){
         this.setState({
-            [e.target.id]: e.target.files[0]
+            [e.target.id]: e.target.value
         });
     }
 
@@ -60,8 +60,10 @@ class Account extends Component{
                 var password = this.state.password_new;
                 this.setState({password : this.state.password_new});
                 let id = this.props.user;
-                let body = {last_name: this.state.last_name, first_name: this.state.first_name, password: password};
+                let body = {last_name: this.state.last_name, first_name: this.state.first_name, password: password, updated_by: id};
                 await UserService.update(id, body);
+                //let response = await UserService.details(id);
+                //this.setState({user: response.data.user});
                 window.location.reload(true);
             }else{
                 this.setState({isError: true});
@@ -80,6 +82,8 @@ class Account extends Component{
         let id = this.props.user;
         try{
             await UserService.updateThumbnail(id, formData);
+            let response = await UserService.details(id);
+            this.setState({user: response.data.user});
             window.location.reload(true);
         }catch (e) {
             console.error(e);
@@ -94,6 +98,7 @@ class Account extends Component{
             <div class="w-75 content_center">
                 <div class="text-center">
                     <img src={`${process.env.REACT_APP_HOST_API}/${user.thumbnail}`} class="rounded thumbnail" alt="Profil picture"/><br/>
+                    {/* btn update thumbnail */}
                     <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal_update_thumbnail">Modifier</button>
 
                 </div>
@@ -140,11 +145,11 @@ class Account extends Component{
                         <form onSubmit={(e) => this.submitUpdate(e)}>
                             <div class="form-group">
                                 <label for="last_name">Nom</label>
-                                <input type="text" class="form-control" id="last_name" defaultValue={user.last_name} onChange={(e) => this.handleChangeUpdate(e)}/>
+                                <input type="text" class="form-control" id="last_name" defaultValue={user.last_name} onChange={(e) => this.handleChangeUpdate(e)} required/>
                             </div>
                             <div class="form-group">
                                 <label for="first_name">Prénom</label>
-                                <input type="text" class="form-control" id="first_name" defaultValue={user.first_name} onChange={(e) => this.handleChangeUpdate(e)}/>
+                                <input type="text" class="form-control" id="first_name" defaultValue={user.first_name} onChange={(e) => this.handleChangeUpdate(e)} required/>
                             </div>
                             <div class="modal-footer">
                                 <button type="submit" class="btn btn-primary">Modifier</button>
@@ -169,11 +174,11 @@ class Account extends Component{
                         <form onSubmit={(e) => this.submitUpdate(e)}>
                             <div class="form-group">
                                 <label for="password">Nouveau mots de passe</label>
-                                <input type="password" class="form-control" id="password_new" onChange={(e) => this.handleChangeUpdate(e)}/>
+                                <input type="password" class="form-control" id="password_new" onChange={(e) => this.handleChangeUpdate(e)} required/>
                             </div>
                             <div class="form-group">
                                 <label for="password_comfirm">Comfirmation du mots de passe</label>
-                                <input type="password" class="form-control" id="password_comfirm" onChange={(e) => this.handleChangeUpdate(e)}/>
+                                <input type="password" class="form-control" id="password_comfirm" onChange={(e) => this.handleChangeUpdate(e)} required/>
                             </div>
                             <div class="modal-footer">
                                 <button type="submit" class="btn btn-primary">Modifier</button>
@@ -189,39 +194,32 @@ class Account extends Component{
             <div class="modal fade" id="modal_update_thumbnail" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="staticBackdropLabel">Modification de la photo de profil</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <form onSubmit={(e) => this.submitThumbnail(e)}>
-                            <div class="form-group">
-                                <label for="thumbnail">Photo</label>
-                                <input type="file" class="form-control" id="thumbnail" accept="image/png, image/jpeg" onChange={(e) => this.handleChangeThumbnail(e)}/>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="submit" class="btn btn-primary">Modifier</button>
-                            </div>
-                        </form>
-                    </div>
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel">Modification de la photo de profil</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form  onSubmit={(e) => this.submitThumbnail(e)}>
+                                <div class="form-group">
+                                    <label for="thumbnail">Photo</label>
+                                    <input type="file" class="form-control" id="thumbnail" accept="image/png, image/jpeg" onChange={(e) => this.handleChangeThumbnail(e)} required/>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-primary">Modifier</button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
-
         </div>
-        
     }
 }
 
 const mapStateToProps = state => {
-    return {user: state.user, token: state.token}
+    return {user: state.user}
 };
 
-const mapDispatchToProps = dispatch => {
-    return {updateUser: user => dispatch(updateUser(user)), 
-        updateUserToken: token => dispatch(updateUserToken(token))}
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Account);
+export default connect(mapStateToProps, null)(Account);

@@ -108,7 +108,7 @@ class Home extends Component{
                         vAxis: {
                             ticks: ['100','50','','',''], 
                             gridlines: {count:100}, 
-                            maxValue: 110, 
+                            maxValue: 10, 
                             minValue: -10, 
                             baselineColor: 'grey',
                             viewWindow: 140

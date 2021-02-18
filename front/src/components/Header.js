@@ -40,8 +40,9 @@ class Header extends Component{
                 <div className="navbar-nav">
                     <a className="navbar-brand" href="/myteam">{partner.name}</a>
                      <div className="navbar-nav">
-                            <Link to={'/'} className="nav-link">Home</Link>
-                            <Link to={'/ressources'} className="nav-link">Resources</Link>
+                            <Link to={'/'} className="nav-link">Accueil</Link>
+                            <Link to={'/myteam'} className="nav-link">Mon organisation</Link>
+                            <Link to={'/ressources'} className="nav-link">Ressources</Link>
                             <Link to={'/partners'} className="nav-link">Partenaires</Link>
                             <Link to={'/myaccount'} className="nav-link">{user.first_name} {user.last_name}</Link>
                     </div>
