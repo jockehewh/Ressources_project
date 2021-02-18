@@ -9,7 +9,10 @@ const PartnerSchema = new Schema({
     address: {type: String},
     city: {type: Schema.Types.ObjectId, ref: 'City'},
     subscription: {type: Boolean},
+    created_by: {type: Schema.Types.ObjectId, ref: 'User'},
     created_at: {type: Date, default: Date.now()},
+    updated_by: {type: Schema.Types.ObjectId, ref: 'User'},
+    updated_at: {type: Date},
 });
 
 export default model('Partner', PartnerSchema);

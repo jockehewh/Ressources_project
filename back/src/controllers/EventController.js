@@ -31,7 +31,7 @@ export default class EventController{
 
         try{
             let {partner_id} = req.params;
-            let events = await Event.find({'partner_id': partner_id})
+            let events = await Event.find({'partner': partner_id})
                 .populate('partner')
                 .populate('city')
                 .populate('created_by')

@@ -16,7 +16,7 @@ export default class Auth{
                 let token = req.headers.authorization.replace(/Bearer /g, '');
                 let decryptToken = jsonwebtoken.decode(token, process.env.JWT_SECRET);
                 let user = await User.findById(decryptToken.sub);
-                let role = await Role.findById(user.role_id);
+                let role = await Role.findById(user.role);
                 
                 if(roles == (role.code)){
                     next();

@@ -58,7 +58,7 @@ export default class UserController{
 
         try{
             let {partner_id} = req.params;
-            let users = await User.find({'partner_id': partner_id})
+            let users = await User.find({'partner': partner_id})
                 .populate('role')
                 .populate('partner')
                 .populate('created_by')

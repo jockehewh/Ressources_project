@@ -30,7 +30,7 @@ export default class Web_articleController{
 
         try{
             let {partner_id} = req.params;
-            let articles = await Web_article.find({'partner_id': partner_id})
+            let articles = await Web_article.find({'partner': partner_id})
                 .populate('partner')
                 .populate('created_by')
                 .populate('updated_by')
