@@ -39,6 +39,13 @@ code {
   width:140px;
 }
 
+.thumbnail_header{
+  width:60px;
+}
+
+.thumbnail_header-circle{
+  width:40px;
+}
 .thumbnail_partner{
   width:240px;
 }

@@ -131,16 +131,18 @@ class Partner extends Component{
             <h1 class="title_page">Partenaires</h1>
 
             {/* search bar */}
-            <div class="p-1 bg-light rounded rounded-pill shadow-sm mb-4">
-                <div class="input-group">
-                <input type="search" placeholder="Rechercher un partenaire" aria-describedby="button-addon1" class="form-control border-0 bg-light"/>
-                <div class="input-group-append">
-                    <button id="button-addon1" type="submit" class="btn btn-link text-primary">
-                        <i class="fa fa-search"></i>
-                    </button>
+            <form>
+                <div class="p-1 bg-light rounded rounded-pill shadow-sm mb-4">
+                    <div class="input-group">
+                    <input type="search" placeholder="Rechercher un partenaire" aria-describedby="button-addon1" class="form-control border-0 bg-light"/>
+                    <div class="input-group-append">
+                        <button id="button-addon1" type="submit" class="btn btn-link text-primary">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+                    </div>
                 </div>
-                </div>
-            </div>
+            </form>
 
             {/*-- Button trigger modal --*/}
             <button type="button" class="btn btn-primary btn_add" data-toggle="modal" data-target="#modal_add_partner"> Ajouter un partenaire </button>

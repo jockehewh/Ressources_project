@@ -54,7 +54,7 @@ export default class Web_articleService{
     }
 
     static async delete(id){
-        return await axios.delete(`${process.env.REACT_APP_HOST_API}/webarticles${id}`, {
+        return await axios.delete(`${process.env.REACT_APP_HOST_API}/webarticles/${id}`, {
             headers: {
                 'Authorization': `Bearer ${localStorage.getItem('user_token')}`
             }

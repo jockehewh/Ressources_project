@@ -62,7 +62,7 @@ export default class UserService{
     }
 
     static async delete(id){
-        return await axios.put(`${process.env.REACT_APP_HOST_API}/users/${id}`,{
+        return await axios.delete(`${process.env.REACT_APP_HOST_API}/users/${id}`,{
             headers: {
                 'Authorization': `Bearer ${localStorage.getItem('user_token')}`
             }

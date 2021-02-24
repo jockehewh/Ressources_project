@@ -37,6 +37,14 @@ class MyTeam extends Component{
         });
     }
 
+    handleChangeUpdate(last_name, first_name, email){ 
+        this.setState({
+            last_name: last_name,
+            first_name: first_name,
+            email: email,
+        });
+    }
+
     handleChangeThumbnail(e){
         this.setState({
             thumbnail: e.target.files[0],
@@ -59,6 +67,35 @@ class MyTeam extends Component{
             await UserService.create(formData);
             //let response = await UserService.list;
             //this.setState({members: response.data.users});
+            window.location.reload(true);
+        }catch (e) {
+            console.error(e);
+        }
+    }
+
+    async submitUpdate(e, id){
+        e.preventDefault();
+        try{
+                let body = {last_name: this.state.last_name, first_name: this.state.first_name, email: this.state.email, updated_by: this.state.user_id};
+                await UserService.update(id, body);
+                //let response = await PartnerService.list;
+                //this.setState({partners: response.data.partners});
+                window.location.reload(true);
+        }catch (e) {
+            console.error(e);
+        }
+    }
+
+    async submitUpdateThumbnail(e, id){
+        e.preventDefault();
+        let {thumbnail} = this.state;
+        let formData = new FormData();
+        formData.append('thumbnail', thumbnail); //body
+
+        try{
+            await UserService.updateThumbnail(id, formData);
+            //let response = await PartnerService.list;
+            //this.setState({partners: response.data.partners});
             window.location.reload(true);
         }catch (e) {
             console.error(e);
@@ -167,7 +204,8 @@ class MyTeam extends Component{
                             <td>{member.email}</td>
                             <td>{member.role.name}</td>
                             <td>
-                                <button type="button" class="btn btn-outline-success">
+                                <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target={"#modal_update_member"+index}
+                                    onClick={(e) => this.handleChangeUpdate(member.last_name, member.first_name, member.email)}>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
                                         <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"></path>
                                         <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"></path>
@@ -197,7 +235,7 @@ class MyTeam extends Component{
                                             </div>
                                             <div class="card-body">
                                                 <div>
-                                                    <p class="card-text"><b>Nom : </b><a href={member.last_name}>{partner.website}</a></p>
+                                                    <p class="card-text"><b>Nom : </b>{member.last_name}</p>
                                                     <p class="card-text"><b>prénom : </b>{member.first_name}</p>
                                                     <p class="card-text"><b>Email : </b><a href={"mailto:"+member.email}>{member.email}</a></p>
                                                     <p class="card-text"><b>Role : </b>{member.role.name}</p>
@@ -205,12 +243,57 @@ class MyTeam extends Component{
                                             </div>
                                             <div class="modal-footer">
                                                 {/* btn update */}
-                                                <a href="#" class="btn btn-success" data-toggle="modal" data-target={"#modal_update_partner"+index}
-                                                    onClick={(e) => this.handleChangeUpdate(partner.name, partner.website, partner.email, partner.phone, partner.address)}>Modifier
+                                                <a href="#" class="btn btn-success" data-toggle="modal" data-target={"#modal_update_member"+index}
+                                                    onClick={(e) => this.handleChangeUpdate(member.last_name, member.first_name, member.email)}>Modifier
                                                 </a>
                                                 {/* btn delete */}
                                                 <a href="#" class="btn btn-danger" onClick={() => this.deleteMember(member._id)}>Supprimer</a>
                                             </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/*-- Modal update --*/}
+                            <div class="modal fade" id={"modal_update_member"+index} data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="staticBackdropLabel">{partner.name}</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="text-center content_center">
+                                                <img src={`${process.env.REACT_APP_HOST_API}/${member.thumbnail}`} class="rounded thumbnail_partner" alt="..."/>
+                                            </div>
+                                            <form  onSubmit={(e) => this.submitUpdateThumbnail(e, member._id)}>
+                                                <div class="form-group">
+                                                    <label for="thumbnail">Photo</label>
+                                                    <input type="file" class="form-control" id="thumbnail" accept="image/png, image/jpeg" onChange={(e) => this.handleChangeThumbnail(e)} required/>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="submit" class="btn btn-primary">Modifier la photo</button>
+                                                </div>
+                                            </form>
+                                            <form onSubmit={(e) => this.submitUpdate(e, member._id)}>
+                                                <div class="form-group">
+                                                    <label for="last_name">Nom</label>
+                                                    <input type="text" class="form-control" id="last_name" defaultValue={member.last_name} onChange={(e) => this.handleChange(e)} required/>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="first_name">Prénom</label>
+                                                    <input type="text" class="form-control" id="first_name" defaultValue={member.first_name} onChange={(e) => this.handleChange(e)} required/>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="email">Email</label>
+                                                    <input type="mail" class="form-control" id="email" defaultValue={member.email} onChange={(e) => this.handleChange(e)} required/>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="submit" class="btn btn-primary">Modifier</button>
+                                                </div>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
