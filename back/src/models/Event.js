@@ -21,4 +21,6 @@ const EventSchema = new Schema({
     updated_at: {type: Date},
 });
 
-export default model('Event', EventSchema);
+const eventModel = model('Event', EventSchema);
+
+module.export = {eventModel}
