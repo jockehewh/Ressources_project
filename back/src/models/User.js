@@ -1,4 +1,4 @@
-import { Schema, model } from 'mongoose';
+const { Schema, model } = require('mongoose');
 
 const UserSchema = new Schema({
     first_name: {type: String, required: true},
@@ -14,4 +14,6 @@ const UserSchema = new Schema({
     updated_at: {type: Date},
 });
 
-export default model('User', UserSchema);
+const userModel = model('User', UserSchema);
+
+module.exports = {userModel}
