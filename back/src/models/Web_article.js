@@ -1,4 +1,4 @@
-import { Schema, model } from 'mongoose';
+const { Schema, model } = require('mongoose');
 
 const Web_articleSchema = new Schema({
     title: {type: String, required: true},
@@ -18,4 +18,6 @@ const Web_articleSchema = new Schema({
     expiration_at: {type: Date},
 });
 
-export default model('Web_article', Web_articleSchema);
+const web_articleModel =  model('Web_article', Web_articleSchema);
+
+module.exports = {web_articleModel}
