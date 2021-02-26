@@ -22,4 +22,4 @@ const isAllowed = (roles)=>{
         }
     }
     
-module.export = {isAllowed}
+module.exports = {isAllowed}
