@@ -1,14 +1,13 @@
-import Web_article from "../models/Web_article";
-import fs from "fs";
+const {web_articleModel} = require("../models/Web_article");
+const fs = require("fs");
 
-export default class Web_articleController{
-
-    static async list(req, res){
+const Web_articleController = {
+    list: async (req, res)=>{
         let status = 200;
         let body = {};
 
         try{
-            let articles = await Web_article.find()
+            let articles = await web_articleModel.find()
                 .populate('partner')
                 .populate('created_by')
                 .populate('updated_by')
@@ -22,15 +21,14 @@ export default class Web_articleController{
             }
         }
         return res.status(status).json(body);
-    }
-
-    static async list_by_partner(req, res){
+    },
+    list_by_partner: async (req, res)=>{
         let status = 200;
         let body = {};
 
         try{
             let {partner_id} = req.params;
-            let articles = await Web_article.find({'partner': partner_id})
+            let articles = await web_articleModel.find({'partner': partner_id})
                 .populate('partner')
                 .populate('created_by')
                 .populate('updated_by')
@@ -44,15 +42,14 @@ export default class Web_articleController{
             }
         }
         return res.status(status).json(body);
-    }
-
-    static async details(req, res){
+    },
+    details: async (req, res)=>{
         let status = 200;
         let body = {};
 
         try{
             let {id} = req.params;
-            let article = await Web_article.findById(id)
+            let article = await web_articleModel.findById(id)
                 .populate('partner')
                 .populate('created_by')
                 .populate('updated_by')
@@ -66,14 +63,13 @@ export default class Web_articleController{
             }
         }
         return res.status(status).json(body);
-    }
-
-    static async store(req, res){
+    },
+    store: async (req, res)=>{
         let status = 200;
         let body = {};
 
         try{
-            let article = await Web_article.create(req.body);
+            let article = await web_articleModel.create(req.body);
             body={article};
         }catch (e) {
             status = status !== 200 ? status : 500;
@@ -83,16 +79,15 @@ export default class Web_articleController{
             }
         }
         return res.status(status).json(body);
-    }
-
-    static async update(req, res){
+    },
+    update: async (req, res)=>{
         let status = 200;
         let body = {};
 
         try{
             delete req.body.thumbnail;
             let {id} = req.params;
-            let article = await Web_article.findByIdAndUpdate(id, req.body, {new: true})
+            let article = await web_articleModel.findByIdAndUpdate(id, req.body, {new: true})
                 .populate('partner')
                 .populate('created_by')
                 .populate('updated_by')
@@ -106,15 +101,14 @@ export default class Web_articleController{
             }
         }
         return res.status(status).json(body);
-    }
-
-    static async updateThumbnail(req, res){
+    },
+    updateThumbnail: async (req, res)=>{
         let status = 200;
         let body = {};
 
         try{
             let {id} = req.params;
-            let article = await Web_article.findById(id).select('thumbnail');    
+            let article = await web_articleModel.findById(id).select('thumbnail');    
 
             if(fs.existsSync(`./${article.thumbnail}`)){
                 await fs.unlinkSync(`./${article.thumbnail}`);
@@ -130,15 +124,14 @@ export default class Web_articleController{
             }
         }
         return res.status(status).json(body);
-    }
-
-    static async remove(req, res){
+    },
+    remove: async (req, res)=>{
         let status = 200;
         let body = {};
 
         try{
             let {id} = req.params;
-            let article = await Web_article.findByIdAndDelete(id);
+            let article = await web_articleModel.findByIdAndDelete(id);
             if(fs.existsSync(`./${article.thumbnail}`)){
                 await fs.unlinkSync(`./${article.thumbnail}`);
             }
@@ -152,3 +145,4 @@ export default class Web_articleController{
         return res.status(status).json(body);
     }
 }
+module.exports = {Web_articleController}

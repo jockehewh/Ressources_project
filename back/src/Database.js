@@ -1,14 +1,7 @@
-const {connect} = require 'mongoose';
+const {connect} = require ('mongoose');
 
-export default class Database {
-
-    /**
-     * Init database
-     * @param url
-     * @param options
-     * @returns {Promise | Promise<unknown>}
-     */
-    static init(url, options = {}){
+const Database = {
+    init: (url, options = {})=>{
         options = Object.assign({}, {
             useCreateIndex: true,
             useNewUrlParser: true,
@@ -17,3 +10,5 @@ export default class Database {
         return connect(url, options);
     }
 }
+
+module.exports = {Database}

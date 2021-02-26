@@ -1,13 +1,12 @@
-import City from "../models/City";
+const {cityModel} = require("../models/City");
 
-export default class CityController{
-
-    static async list(req, res){
+const CityController = {
+    list: async (req,res)=>{
         let status = 200;
         let body = {};
 
         try{
-            let cities = await City.find().select('-__v');
+            let cities = await cityModel.find().select('-__v');
             body = {cities};
         }catch (e) {
             status = status !== 200 ? status : 500;
@@ -17,15 +16,14 @@ export default class CityController{
             }
         }
         return res.status(status).json(body);
-    }
-
-    static async details(req, res){
+    },
+    details: async (req, res)=>{
         let status = 200;
         let body = {};
 
         try{
             let {codePostal} = req.params;
-            let city = await City.findOne({codesPostaux: codePostal}).select('-__v');
+            let city = await cityModel.findOne({codesPostaux: codePostal}).select('-__v');
             body = {city};
         }catch (e) {
             status = status !== 200 ? status : 500;
@@ -37,3 +35,5 @@ export default class CityController{
         return res.status(status).json(body);
     }
 }
+
+module.exports = {CityController}

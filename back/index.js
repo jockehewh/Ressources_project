@@ -1,5 +1,5 @@
-const Server = require "./src/Server";
-const Database = require "./src/Database";
+const {Server} = require ("./src/Server");
+const {Database} = require ("./src/Database");
 
 const app = Server.config();
 const {APP_CONFIG, APP_PORT, DB_NAME, DB_HOST, DB_PORT, DB_USER, DB_PASSWORD} = process.env;

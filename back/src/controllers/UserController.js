@@ -1,16 +1,15 @@
-import User from "../models/User";
-import jsonwebtoken from 'jsonwebtoken';
-import fs from 'fs';
+const {userModel} = require ("../models/User");
+const jsonwebtoken = require ('jsonwebtoken');
+const fs = require ('fs');
 
-export default class UserController{
-
-    static async auth(req, res){
+const UserController = {
+    auth: async (req, res)=>{
         let status = 200;
         let body = {};
 
         try{
             let {email, password} = req.body;
-            let user = await User.findOne({'email': email}).select('-__v');
+            let user = await userModel.findOne({'email': email}).select('-__v');
             if(user && password === user.password){
                 let {JWT_SECRET} = process.env;
 
@@ -28,14 +27,13 @@ export default class UserController{
             }
         }
         return res.status(status).json(body);
-    }
-
-    static async list(req, res){
+    },
+    list: async (req, res)=>{
         let status = 200;
         let body = {};
 
         try{
-            let users = await User.find()
+            let users = await userModel.find()
                 .populate('role')
                 .populate('partner')
                 .populate('created_by')
@@ -50,15 +48,14 @@ export default class UserController{
             }
         }
         return res.status(status).json(body);
-    }
-
-    static async list_by_partner(req, res){
+    },
+    list_by_partner: async (req, res)=>{
         let status = 200;
         let body = {};
 
         try{
             let {partner_id} = req.params;
-            let users = await User.find({'partner': partner_id})
+            let users = await userModel.find({'partner': partner_id})
                 .populate('role')
                 .populate('partner')
                 .populate('created_by')
@@ -73,15 +70,14 @@ export default class UserController{
             }
         }
         return res.status(status).json(body);
-    }
-
-    static async details(req, res){
+    },
+    details: async (req, res)=>{
         let status = 200;
         let body = {};
 
         try{
             let {id} = req.params;
-            let user = await User.findById(id)
+            let user = await userModel.findById(id)
                 .populate('role')
                 .populate('partner')
                 .populate('created_by')
@@ -96,14 +92,13 @@ export default class UserController{
             }
         }
         return res.status(status).json(body);
-    }
-
-    static async store(req, res){
+    },
+    store: async (req, res)=>{
         let status = 200;
         let body = {};
 
         try{
-            let user = await User.create(req.body);
+            let user = await userModel.create(req.body);
             body={user};
         }catch (e) {
             status = status !== 200 ? status : 500;
@@ -113,16 +108,15 @@ export default class UserController{
             }
         }
         return res.status(status).json(body);
-    }
-
-    static async update(req, res){
+    },
+    update: async (req, res)=>{
         let status = 200;
         let body = {};
 
         try{
             delete req.body.thumbnail;
             let {id} = req.params;
-            let user = await User.findByIdAndUpdate(id, req.body, {new: true})
+            let user = await userModel.findByIdAndUpdate(id, req.body, {new: true})
                 .populate('role')
                 .populate('partner')
                 .populate('created_by')
@@ -137,15 +131,14 @@ export default class UserController{
             }
         }
         return res.status(status).json(body);
-    }
-
-    static async updateThumbnail(req, res){
+    },
+    updateThumbnail: async (req, res)=>{
         let status = 200;
         let body = {};
 
         try{
             let {id} = req.params;
-            let user = await User.findById(id).select('thumbnail');
+            let user = await userModel.findById(id).select('thumbnail');
 
             if(fs.existsSync(`./${user.thumbnail}`)){
                 await fs.unlinkSync(`./${user.thumbnail}`);
@@ -161,15 +154,14 @@ export default class UserController{
             }
         }
         return res.status(status).json(body);
-    }
-
-    static async remove(req, res){
+    },
+    remove: async (req, res)=>{
         let status = 200;
         let body = {};
 
         try{
             let {id} = req.params;
-            let user = await User.findByIdAndDelete(id);
+            let user = await userModel.findByIdAndDelete(id);
             if(fs.existsSync(`./${user.thumbnail}`)){
                 await fs.unlinkSync(`./${user.thumbnail}`);
             }
@@ -183,3 +175,4 @@ export default class UserController{
         return res.status(status).json(body);
     }
 }
+module.exports = {UserController}

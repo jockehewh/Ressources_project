@@ -17,4 +17,4 @@ const PartnerSchema = new Schema({
 
 const partnerModel = model('Partner', PartnerSchema);
 
-modules.exports= {partnerModel}
+module.exports= {partnerModel}

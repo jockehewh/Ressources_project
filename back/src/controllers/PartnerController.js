@@ -1,14 +1,23 @@
-import Partner from "../models/Partner";
-import fs from 'fs';
+const {partnerModel} = require("../models/Partner");
+const fs = require('fs');
 
-export default class PartnerController{
+/* 
+{
+    list: async (req, res)=>{},
+    details: async (req, res)=>{},
+    store: async (req, res)=>{},
+    update: async (req, res)=>{},
+    updateThumbnail: async (req, res)=>{},
+    remove: async (req, res)=>{}
+}
+ */
 
-    static async list(req, res){
+const PartnerController = {
+    list: async (req, res)=>{
         let status = 200;
         let body = {};
-
         try{
-            let partners = await Partner.find()
+            let partners = await partnerModel.find()
                 .populate('city')
                 .select('-__v');
             body = {partners};
@@ -20,15 +29,14 @@ export default class PartnerController{
             }
         }
         return res.status(status).json(body);
-    }
-
-    static async details(req, res){
+    },
+    details: async (req, res)=>{
         let status = 200;
         let body = {};
 
         try{
             let {id} = req.params;
-            let partner = await Partner.findById(id)
+            let partner = await partnerModel.findById(id)
                 .populate('city')
                 .select('-__v');
             body = {partner};
@@ -40,14 +48,13 @@ export default class PartnerController{
             }
         }
         return res.status(status).json(body);
-    }
-
-    static async store(req, res){
+    },
+    store: async (req, res)=>{
         let status = 200;
         let body = {};
 
         try{
-            let partner = await Partner.create(req.body);
+            let partner = await partnerModel.create(req.body);
             body={partner};
         }catch (e) {
             status = status !== 200 ? status : 500;
@@ -57,9 +64,8 @@ export default class PartnerController{
             }
         }
         return res.status(status).json(body);
-    }
-
-    static async update(req, res){
+    },
+    update: async (req, res)=>{
         let status = 200;
         let body = {};
 
@@ -67,7 +73,7 @@ export default class PartnerController{
             let stock_thumbnail = req.body.thumbnail;
             delete req.body.thumbnail;
             let {id} = req.params;
-            let partner = await Partner.findByIdAndUpdate(id, req.body, {new: true})
+            let partner = await partnerModel.findByIdAndUpdate(id, req.body, {new: true})
                 .populate('city')
                 .select('-__v');
 
@@ -89,15 +95,14 @@ export default class PartnerController{
             }
         }
         return res.status(status).json(body);
-    }
-
-    static async updateThumbnail(req, res){
+    },
+    updateThumbnail: async (req, res)=>{
         let status = 200;
         let body = {};
 
         try{
             let {id} = req.params;
-            let partner = await Partner.findById(id).select('thumbnail');
+            let partner = await partnerModel.findById(id).select('thumbnail');
 
             if(fs.existsSync(`./${partner.thumbnail}`)){
                 await fs.unlinkSync(`./${partner.thumbnail}`);
@@ -113,15 +118,14 @@ export default class PartnerController{
             }
         }
         return res.status(status).json(body);
-    }
-
-    static async remove(req, res){
+    },
+    remove: async (req, res)=>{
         let status = 200;
         let body = {};
 
         try{
             let {id} = req.params;
-            let partner = await Partner.findByIdAndDelete(id);
+            let partner = await partnerModel.findByIdAndDelete(id);
             if(fs.existsSync(`./${partner.thumbnail}`)){
                 await fs.unlinkSync(`./${partner.thumbnail}`);
             }
@@ -135,3 +139,5 @@ export default class PartnerController{
         return res.status(status).json(body);
     }
 }
+
+module.exports = {PartnerController}

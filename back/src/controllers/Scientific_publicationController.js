@@ -1,14 +1,22 @@
-import Scientific_publication from "../models/Scientific_publication";
-import fs from "fs"
-
-export default class Scientific_publicationController{
-
-    static async list(req, res){
+const {scientific_publicationModel} = require("../models/Scientific_publication");
+const fs = require("fs")
+/* 
+{
+    list: async (req, res)=>{},
+    details: async (req, res)=>{},
+    store: async (req, res)=>{},
+    update: async (req, res)=>{},
+    updateThumbnail: async (req, res)=>{},
+    remove: async (req, res)=>{}
+}
+ */
+const Scientific_publicationController = {
+    list: async (req, res)=>{
         let status = 200;
         let body = {};
 
         try{
-            let publications = await Scientific_publication.find()
+            let publications = await scientific_publicationModel.find()
                 .populate('partner')
                 .populate('created_by')
                 .populate('updated_by')
@@ -22,15 +30,14 @@ export default class Scientific_publicationController{
             }
         }
         return res.status(status).json(body);
-    }
-
-    static async list_by_partner(req, res){
+    },
+    list_by_partner: async (req, res)=>{
         let status = 200;
         let body = {};
 
         try{
             let {partner_id} = req.params;
-            let publications = await Scientific_publication.find({'partner': partner_id})
+            let publications = await scientific_publicationModel.find({'partner': partner_id})
                 .populate('partner')
                 .populate('created_by')
                 .populate('updated_by')
@@ -44,15 +51,14 @@ export default class Scientific_publicationController{
             }
         }
         return res.status(status).json(body);
-    }
-
-    static async details(req, res){
+    },
+    details: async (req, res)=>{
         let status = 200;
         let body = {};
 
         try{
             let {id} = req.params;
-            let publication = await Scientific_publication.findById(id)
+            let publication = await scientific_publicationModel.findById(id)
                 .populate('partner')
                 .populate('created_by')
                 .populate('updated_by')
@@ -66,14 +72,13 @@ export default class Scientific_publicationController{
             }
         }
         return res.status(status).json(body);
-    }
-
-    static async store(req, res){
+    },
+    store: async (req, res)=>{
         let status = 200;
         let body = {};
 
         try{
-            let publication = await Scientific_publication.create(req.body);
+            let publication = await scientific_publicationModel.create(req.body);
             body={publication};
         }catch (e) {
             status = status !== 200 ? status : 500;
@@ -83,16 +88,15 @@ export default class Scientific_publicationController{
             }
         }
         return res.status(status).json(body);
-    }
-
-    static async update(req, res){
+    },
+    update: async (req, res)=>{
         let status = 200;
         let body = {};
 
         try{
             delete req.body.thumbnail;
             let {id} = req.params;
-            let publication = await Scientific_publication.findByIdAndUpdate(id, req.body, {new: true})
+            let publication = await scientific_publicationModel.findByIdAndUpdate(id, req.body, {new: true})
                 .populate('partner')
                 .populate('created_by')
                 .populate('updated_by')
@@ -106,15 +110,14 @@ export default class Scientific_publicationController{
             }
         }
         return res.status(status).json(body);
-    }
-
-    static async updateThumbnail(req, res){
+    },
+    updateThumbnail: async (req, res)=>{
         let status = 200;
         let body = {};
 
         try{
             let {id} = req.params;
-            let publication = await Scientific_publication.findById(id).select('thumbnail');    
+            let publication = await scientific_publicationModel.findById(id).select('thumbnail');    
 
             if(fs.existsSync(`./${publication.thumbnail}`)){
                 await fs.unlinkSync(`./${publication.thumbnail}`);
@@ -130,15 +133,14 @@ export default class Scientific_publicationController{
             }
         }
         return res.status(status).json(body);
-    }
-
-    static async remove(req, res){
+    },
+    remove: async (req, res)=>{
         let status = 200;
         let body = {};
 
         try{
             let {id} = req.params;
-            let publication = await Scientific_publication.findByIdAndDelete(id);
+            let publication = await scientific_publicationModel.findByIdAndDelete(id);
             if(fs.existsSync(`./${publication.thumbnail}`)){
                 await fs.unlinkSync(`./${publication.thumbnail}`);
             }
@@ -152,3 +154,4 @@ export default class Scientific_publicationController{
         return res.status(status).json(body);
     }
 }
+module.exports = {Scientific_publicationController}

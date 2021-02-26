@@ -1,14 +1,22 @@
-import Web_site from "../models/Web_site";
-import fs from "fs";
-
-export default class Web_siteController{
-
-    static async list(req, res){
+const {web_siteModel} = require("../models/Web_site");
+const fs = require("fs");
+/* 
+{
+    list: async (req, res)=>{},
+    details: async (req, res)=>{},
+    store: async (req, res)=>{},
+    update: async (req, res)=>{},
+    updateThumbnail: async (req, res)=>{},
+    remove: async (req, res)=>{}
+}
+ */
+const Web_siteController = {
+    list: async (req, res)=>{
         let status = 200;
         let body = {};
 
         try{
-            let sites = await Web_site.find()
+            let sites = await web_siteModel.find()
                 .populate('partner')
                 .populate('created_by')
                 .populate('updated_by')
@@ -22,15 +30,14 @@ export default class Web_siteController{
             }
         }
         return res.status(status).json(body);
-    }
-
-    static async list_by_partner(req, res){
+    },
+    list_by_partner: async (req, res)=>{
         let status = 200;
         let body = {};
 
         try{
             let {partner_id} = req.params;
-            let sites = await Web_site.find({'partner': partner_id})
+            let sites = await web_siteModel.find({'partner': partner_id})
                 .populate('partner')
                 .populate('created_by')
                 .populate('updated_by')
@@ -44,15 +51,14 @@ export default class Web_siteController{
             }
         }
         return res.status(status).json(body);
-    }
-
-    static async details(req, res){
+    },
+    details: async (req, res)=>{
         let status = 200;
         let body = {};
 
         try{
             let {id} = req.params;
-            let site = await Web_site.findById(id)
+            let site = await web_siteModel.findById(id)
                 .populate('partner')
                 .populate('created_by')
                 .populate('updated_by')
@@ -66,14 +72,13 @@ export default class Web_siteController{
             }
         }
         return res.status(status).json(body);
-    }
-
-    static async store(req, res){
+    },
+    store: async (req, res)=>{
         let status = 200;
         let body = {};
 
         try{
-            let site = await Web_site.create(req.body);
+            let site = await web_siteModel.create(req.body);
             body={site};
         }catch (e) {
             status = status !== 200 ? status : 500;
@@ -83,16 +88,15 @@ export default class Web_siteController{
             }
         }
         return res.status(status).json(body);
-    }
-
-    static async update(req, res){
+    },
+    update: async (req, res)=>{
         let status = 200;
         let body = {};
 
         try{
             delete req.body.thumbnail;
             let {id} = req.params;
-            let site = await Web_site.findByIdAndUpdate(id, req.body, {new: true})
+            let site = await web_siteModel.findByIdAndUpdate(id, req.body, {new: true})
                 .populate('partner')
                 .populate('created_by')
                 .populate('updated_by')
@@ -106,15 +110,14 @@ export default class Web_siteController{
             }
         }
         return res.status(status).json(body);
-    }
-
-    static async updateThumbnail(req, res){
+    },
+    updateThumbnail: async (req, res)=>{
         let status = 200;
         let body = {};
 
         try{
             let {id} = req.params;
-            let site = await Web_site.findById(id).select('thumbnail');    
+            let site = await web_siteModel.findById(id).select('thumbnail');    
 
             if(fs.existsSync(`./${site.thumbnail}`)){
                 await fs.unlinkSync(`./${site.thumbnail}`);
@@ -130,15 +133,14 @@ export default class Web_siteController{
             }
         }
         return res.status(status).json(body);
-    }
-
-    static async remove(req, res){
+    },
+    remove: async (req, res)=>{
         let status = 200;
         let body = {};
 
         try{
             let {id} = req.params;
-            let site = await Web_site.findByIdAndDelete(id);
+            let site = await web_siteModel.findByIdAndDelete(id);
             if(fs.existsSync(`./${site.thumbnail}`)){
                 await fs.unlinkSync(`./${site.thumbnail}`);
             }
@@ -152,3 +154,4 @@ export default class Web_siteController{
         return res.status(status).json(body);
     }
 }
+module.exports = {Web_siteController}

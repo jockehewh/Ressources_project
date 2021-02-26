@@ -18,4 +18,4 @@ const Web_siteSchema = new Schema({
 
 const web_siteModel = model('Web_site', Web_siteSchema);
 
-modules.exports = {web_siteModel}
+module.exports = {web_siteModel}

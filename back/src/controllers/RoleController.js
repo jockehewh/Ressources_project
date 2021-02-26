@@ -1,13 +1,22 @@
-import Role from "../models/Role";
+const {roleModel} = require("../models/Role");
 
-export default class RoleController{
-
-    static async list(req, res){
+/* 
+{
+    list: async (req, res)=>{},
+    details: async (req, res)=>{},
+    store: async (req, res)=>{},
+    update: async (req, res)=>{},
+    updateThumbnail: async (req, res)=>{},
+    remove: async (req, res)=>{}
+}
+ */
+const RoleController = {
+    list: async (req, res)=>{
         let status = 200;
         let body = {};
 
         try{
-            let roles = await Role.find().select('-__v');
+            let roles = await roleModel.find().select('-__v');
             body = {roles};
         }catch (e) {
             status = status !== 200 ? status : 500;
@@ -17,15 +26,14 @@ export default class RoleController{
             }
         }
         return res.status(status).json(body);
-    }
-
-    static async details(req, res){
+    },
+    details: async (req, res)=>{
         let status = 200;
         let body = {};
 
         try{
             let {id} = req.params;
-            let role = await Role.findById(id).select('-__v');
+            let role = await roleModel.findById(id).select('-__v');
             body = {role};
         }catch (e) {
             status = status !== 200 ? status : 500;
@@ -35,14 +43,13 @@ export default class RoleController{
             }
         }
         return res.status(status).json(body);
-    }
-
-    static async store(req, res){
+    },
+    store: async (req, res)=>{
         let status = 200;
         let body = {};
 
         try{
-            let role = await Role.create(req.body);
+            let role = await roleModel.create(req.body);
             body={role};
         }catch (e) {
             status = status !== 200 ? status : 500;
@@ -52,15 +59,14 @@ export default class RoleController{
             }
         }
         return res.status(status).json(body);
-    }
-
-    static async update(req, res){
+    },
+    update: async (req, res)=>{
         let status = 200;
         let body = {};
 
         try{
             let {id} = req.params;
-            let role = await Role.findByIdAndUpdate(id, req.body, {new: true})
+            let role = await roleModel.findByIdAndUpdate(id, req.body, {new: true})
                 .select('-__v');
             body = {role};
         }catch (e) {
@@ -71,15 +77,14 @@ export default class RoleController{
             }
         }
         return res.status(status).json(body);
-    }
-
-    static async remove(req, res){
+    },
+    remove: async (req, res)=>{
         let status = 200;
         let body = {};
 
         try{
             let {id} = req.params;
-            await Role.findByIdAndDelete(id);
+            await roleModel.findByIdAndDelete(id);
         }catch (e) {
             status = status !== 200 ? status : 500;
             body = {
@@ -90,3 +95,5 @@ export default class RoleController{
         return res.status(status).json(body);
     }
 }
+
+module.exports = {RoleController}

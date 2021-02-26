@@ -1,7 +1,7 @@
-import dotenv from 'dotenv';
+const dotenv = require('dotenv');
 dotenv.config();
-import expressJwt from 'express-jwt';
-import User from "../models/User";
+const expressJwt = require ('express-jwt');
+const {userModel} = require ("../models/User");
 
 const jwt = () => {
     const secret = process.env.JWT_SECRET;
@@ -16,11 +16,11 @@ const jwt = () => {
 };
 
 async function isRevoked(req, payload, done){
-    const user = await User.findById(payload.sub);
+    const user = await userModel.findById(payload.sub);
     if(!user){
         return done(null, true);
     }
     done();
 }
 
-export default jwt;
+module.exports = {jwt}

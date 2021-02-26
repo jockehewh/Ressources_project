@@ -1,14 +1,12 @@
-import Event from "../models/Event";
-import fs from 'fs';
-
-export default class EventController{
-
-    static async list(req, res){
+const {eventModel} = require ("../models/Event");
+const fs = require ('fs');
+const EventController = {
+    list: async (req, res)=>{
         let status = 200;
         let body = {};
 
         try{
-            let events = await Event.find()
+            let events = await eventModel.find()
                 .populate('partner')
                 .populate('city')
                 .populate('created_by')
@@ -23,15 +21,14 @@ export default class EventController{
             }
         }
         return res.status(status).json(body);
-    }
-
-    static async list_by_partner(req, res){
+    },
+    list_by_partner: async (req, res)=>{
         let status = 200;
         let body = {};
 
         try{
             let {partner_id} = req.params;
-            let events = await Event.find({'partner': partner_id})
+            let events = await eventModel.find({'partner': partner_id})
                 .populate('partner')
                 .populate('city')
                 .populate('created_by')
@@ -46,15 +43,14 @@ export default class EventController{
             }
         }
         return res.status(status).json(body);
-    }
-
-    static async details(req, res){
+    },
+    details: async (req, res)=>{
         let status = 200;
         let body = {};
 
         try{
             let {id} = req.params;
-            let event = await Event.findById(id)
+            let event = await eventModel.findById(id)
                 .populate('partner')
                 .populate('city')
                 .populate('created_by')
@@ -69,14 +65,13 @@ export default class EventController{
             }
         }
         return res.status(status).json(body);
-    }
-
-    static async store(req, res){
+    },
+    store: async (req, res)=>{
         let status = 200;
         let body = {};
 
         try{
-            let event = await Event.create(req.body);
+            let event = await eventModel.create(req.body);
             body={event};
         }catch (e) {
             status = status !== 200 ? status : 500;
@@ -86,16 +81,15 @@ export default class EventController{
             }
         }
         return res.status(status).json(body);
-    }
-
-    static async update(req, res){
+    },
+    update: async (req, res)=>{
         let status = 200;
         let body = {};
 
         try{
             delete req.body.thumbnail;
             let {id} = req.params;
-            let event = await Event.findByIdAndUpdate(id, req.body, {new: true})
+            let event = await eventModel.findByIdAndUpdate(id, req.body, {new: true})
                 .populate('partner')
                 .populate('city')
                 .populate('created_by')
@@ -110,15 +104,14 @@ export default class EventController{
             }
         }
         return res.status(status).json(body);
-    }
-
-    static async updateThumbnail(req, res){
+    },
+    updateThumbnail: async (req, res)=>{
         let status = 200;
         let body = {};
 
         try{
             let {id} = req.params;
-            let event = await Event.findById(id).select('thumbnail');    
+            let event = await eventModel.findById(id).select('thumbnail');    
 
             if(fs.existsSync(`./${event.thumbnail}`)){
                 await fs.unlinkSync(`./${event.thumbnail}`);
@@ -134,15 +127,14 @@ export default class EventController{
             }
         }
         return res.status(status).json(body);
-    }
-
-    static async remove(req, res){
+    },
+    remove: async (req, res)=>{
         let status = 200;
         let body = {};
 
         try{
             let {id} = req.params;
-            let event = await Event.findByIdAndDelete(id);
+            let event = await eventModel.findByIdAndDelete(id);
             if(fs.existsSync(`./${event.thumbnail}`)){
                 await fs.unlinkSync(`./${event.thumbnail}`);
             }
@@ -156,3 +148,4 @@ export default class EventController{
         return res.status(status).json(body);
     }
 }
+module.exports = {EventController}

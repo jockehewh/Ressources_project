@@ -1,18 +1,14 @@
-const dotenv = require "dotenv";
+const dotenv = require ("dotenv");
 dotenv.config();
-const express = require "express";
-const bodyParser = require "body-parser";
-const cors = require "cors";
-const router = require "./routes";
-const jwt = require "./config/jwt";
+const express = require ("express");
+const bodyParser = require ("body-parser");
+const cors = require ("cors");
+const {router} = require ("./routes");
+const {jwt} = require ("./config/jwt");
 
-export default class Server{
 
-    /**
-     * Config server
-     * @returns {app}
-     */
-    static config(){
+const Server = {
+    config: ()=>{
         const app = express();
         app.use(jwt());
 
@@ -29,3 +25,5 @@ export default class Server{
         return app;
     }
 }
+
+module.exports = {Server}
