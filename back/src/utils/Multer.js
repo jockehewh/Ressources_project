@@ -27,4 +27,4 @@ const {generateStringRandom} = require("./Utils");
         }
     }
 
-module.export = {upload}
+module.exports = {upload}
