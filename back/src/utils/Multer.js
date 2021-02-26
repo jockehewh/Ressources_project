@@ -26,3 +26,5 @@ const {generateStringRandom} = require("./Utils");
             upl(req, res, next, () => next());
         }
     }
+
+module.export = {upload}
