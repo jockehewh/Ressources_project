@@ -1,4 +1,4 @@
-import { Schema, model } from 'mongoose';
+const { Schema, model } = require('mongoose');
 
 const Scientific_publicationSchema = new Schema({
     title: {type: String, required: true},
@@ -20,4 +20,6 @@ const Scientific_publicationSchema = new Schema({
     expiration_at: {type: Date},
 });
 
-export default model('Scientific_publication', Scientific_publicationSchema);
+const scientific_publicationModel model('Scientific_publication', Scientific_publicationSchema);
+
+module.exports = {scientific_publicationModel}

@@ -1,11 +1,10 @@
-import multer from 'multer';
-import path from 'path';
-import fs from 'fs';
-import Utils from "./Utils";
+const multer = require('multer');
+const path = require('path');
+const fs = require('fs');
+const {generateStringRandom} = require("./Utils");
 
-export default class Multer{
 
-    static upload(uploadPath, identifier){
+    const upload = (uploadPath, identifier)=>{
         return (req, res, next) => {
 
             const storage = multer.diskStorage({
@@ -17,7 +16,7 @@ export default class Multer{
                     cb(null, `./uploads/${uploadPath}`)
                 },
                 filename: (req, file, cb) => {
-                    let name = Utils.generateStringRandom() + path.extname(file.originalname);
+                    let name = generateStringRandom() + path.extname(file.originalname);
                     req.body[identifier] = `uploads/${uploadPath}/${name}`;
                     cb(null, name)
                 }
@@ -27,4 +26,5 @@ export default class Multer{
             upl(req, res, next, () => next());
         }
     }
-}
+
+module.exports = {upload}

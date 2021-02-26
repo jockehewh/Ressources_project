@@ -1,4 +1,4 @@
-import { Schema, model } from 'mongoose';
+const { Schema, model } = require('mongoose');
 
 const Web_siteSchema = new Schema({
     title: {type: String, required: true},
@@ -16,5 +16,6 @@ const Web_siteSchema = new Schema({
     updated_at: {type: Date},
 });
 
-export default model('Web_site', Web_siteSchema);
+const web_siteModel = model('Web_site', Web_siteSchema);
 
+modules.exports = {web_siteModel}

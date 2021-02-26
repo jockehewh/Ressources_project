@@ -1,4 +1,4 @@
-import { Schema, model } from 'mongoose';
+const { Schema, model } = require('mongoose');
 
 const PartnerSchema = new Schema({
     name: {type: String, required: true},
@@ -15,4 +15,6 @@ const PartnerSchema = new Schema({
     updated_at: {type: Date},
 });
 
-export default model('Partner', PartnerSchema);
+const partnerModel = model('Partner', PartnerSchema);
+
+modules.exports= {partnerModel}

@@ -1,15 +1,8 @@
-import jsonwebtoken from 'jsonwebtoken';
-import User from '../models/User';
-import Role from '../models/Role';
+const jsonwebtoken = require('jsonwebtoken');
+const {User} = require('../models/User');
+const {Role} = require('../models/Role');
 
-export default class Auth{
-
-    /**
-     * Check if user is right to access routes
-     * @param roles
-     * @returns {function(...[*]=)}
-     */
-    static isAllowed(roles){
+const isAllowed = (roles)=>{
         return async (req, res, next) => {
 
             try{
@@ -28,4 +21,5 @@ export default class Auth{
             }
         }
     }
-}
+    
+module.exports = {isAllowed}
