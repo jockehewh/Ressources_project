@@ -12,4 +12,4 @@ const CitySchema = new Schema({
 
 const cityModel = model('City', CitySchema)
 
-module.export = {cityModel}
+module.exports = {cityModel}
