@@ -61,6 +61,9 @@ router.post('/webarticles', Multer.upload('web_articles', 'thumbnail'), Web_arti
 router.put('/webarticles/:id', Web_articleController.update);
 router.put('/webarticles/:id/thumbnail', Multer.upload('web_articles', 'thumbnail'), Web_articleController.updateThumbnail);
 router.delete('/webarticles/:id', Web_articleController.remove);
+//Public
+router.get('/webarticles_public', Web_articleController.list);
+router.get('/webarticles_public/:id', Web_articleController.details);
 
 /**
  * Web_sites
@@ -72,6 +75,9 @@ router.post('/websites', Multer.upload('web_sites', 'thumbnail'), Web_siteContro
 router.put('/websites/:id', Web_siteController.update);
 router.put('/websites/:id/thumbnail', Multer.upload('web_sites', 'thumbnail'), Web_siteController.updateThumbnail);
 router.delete('/websites/:id', Web_siteController.remove);
+//Public
+router.get('/websites_public', Web_siteController.list);
+router.get('/websites_public/:id', Web_siteController.details);
 
 /**
  * Scientific_publications
@@ -83,6 +89,9 @@ router.post('/scientificpublications', Multer.upload('scientific_publications', 
 router.put('/scientificpublications/:id', Scientific_publicationController.update);
 router.put('/scientificpublications/:id/thumbnail', Multer.upload('scientific_publications', 'thumbnail'), Scientific_publicationController.updateThumbnail);
 router.delete('/scientificpublications/:id', Scientific_publicationController.remove);
+//Public
+router.get('/scientificpublications_public', Scientific_publicationController.list);
+router.get('/scientificpublications_public/:id', Scientific_publicationController.details);
 
 /**
  * Events
@@ -94,5 +103,9 @@ router.post('/events', Multer.upload('events', 'thumbnail'), EventController.sto
 router.put('/events/:id', EventController.update);
 router.put('/events/:id/thumbnail', Multer.upload('events', 'thumbnail'), EventController.updateThumbnail);
 router.delete('/events/:id', EventController.remove);
+//Public
+router.get('/events_public', EventController.list);
+router.get('/events_public/:id', EventController.details);
+
 
 export default router;
