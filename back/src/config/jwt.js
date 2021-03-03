@@ -9,6 +9,14 @@ const jwt = () => {
         .unless({
             path: [
                 '/users/auth',
+                '/webarticles_public',
+                /^\/webarticles_public\/.*/,
+                '/websites_public',
+                /^\/websites_public\/.*/,
+                '/scientificpublications_public',
+                /^\/scientificpublications_public\/.*/,
+                '/events_public',
+                /^\/events_public\/.*/,
                 /^\/api-docs\/.*/,
                 /^\/uploads\/.*/
             ]
